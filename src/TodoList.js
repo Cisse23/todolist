@@ -14,6 +14,11 @@ function TodoList(){
     const addTodo = (event) => {
         setTodoList([todo, ...todoList]);
     }
+
+    const removeTodo = (event) => {
+        console.log("delete " + todo.description);
+        setTodoList(todoList.filter((todo, i) => i !== event.target.value));
+    }
     
     return(
         <div>
@@ -28,6 +33,7 @@ function TodoList(){
                     <tr key={index}>
                         <td>{todo.date}</td>
                         <td>{todo.description}</td>
+                        <td><button onClick={removeTodo}>Delete</button></td>
                     </tr>)}
                 </tbody>
             </table>
