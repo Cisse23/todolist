@@ -27,7 +27,7 @@ function TodoList(){
         <div>
             <h1>Simple Todo list</h1>
             Description: <input type="text" name="description" onChange={inputChanged} value={todo.description} />      
-            Date: <input type="text" name="date" onChange={inputChanged} value={todo.date} />
+            Date: <input type="date" name="date" onChange={inputChanged} value={todo.date} />
             <button onClick={addTodo}>Add</button>
             <hr />
             < TodoTable todos={todoList} removeTodo={removeTodo} />
