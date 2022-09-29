@@ -18,9 +18,9 @@ function TodoList(){
     }
 
     
-    const removeTodo = (event) => {
+    const removeTodo = (row) => {
         console.log("delete " + todo.description);
-        setTodoList(todoList.filter((todo, i) => i !== event.target.value));
+        setTodoList(todoList.filter((todo, i) => i !== row));
     }
    
     return(
