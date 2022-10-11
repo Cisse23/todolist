@@ -13,12 +13,12 @@ function TodoList(){
     });
     const [todoList, setTodoList] = React.useState([]);
     
-    const gridRef = useRef(); //hook funktio
+    const gridRef = useRef(); //React hook funktio
     
     const [columnDefs] = useState([
-        {field: 'description', sortable: true, filter: true},
-        {field: 'date', sortable: true, filter: true},
-        {field: 'priority', sortable: true, filter: true,
+        {field: 'description', sortable: true, filter: true, floatingFilter: true},
+        {field: 'date', sortable: true, filter: true, floatingFilter: true},
+        {field: 'priority', sortable: true, filter: true, floatingFilter: true,
             cellStyle: params => params.value === 'high' ? {color: 'red'} : {color: 'black'}}
     ]);
     
@@ -63,7 +63,8 @@ function TodoList(){
                     onGridReady={params => gridRef.current = params.api}
                     rowSelection="single"
                     rowData={todoList}
-                    columnDefs={columnDefs}>
+                    columnDefs={columnDefs}
+                    animateRows={true}>
                 </AgGridReact>
             </div>
 
@@ -73,6 +74,7 @@ function TodoList(){
 }
 
 export default TodoList;
-
+//https://ag-grid.com/react-data-grid/floating-filters/ (floating filter)
+//https://ag-grid.com/react-data-grid/row-animation/(row animation)
 //https://ag-grid.com/react-data-grid/grid-options/ (grid props)
 //https://ag-grid.com/react-data-grid/column-properties/
