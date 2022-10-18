@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 
 
-import { AgGridReact } from 'ag-grid-react';
+import { AgGridReact, ChangeDetectionStrategyType } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-material.css'; //löytyy bootstrap, material-design tai alpine teema
 import Button from '@mui/material/Button';
@@ -11,13 +11,14 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import Snackbar from '@mui/material/Snackbar';
 
-
+import dayjs from "dayjs";
+import BasicDateTimePicker from "./BasicDateTimePicker";
 
 
 function TodoList(){
     const [todo, setTodo] = React.useState({
         description: 'Get started',
-        date: '', 
+        date: dayjs().toString(), 
         priority: 'medium'
     });
     const [todoList, setTodoList] = React.useState([]);
@@ -31,10 +32,15 @@ function TodoList(){
             cellStyle: params => params.value === 'high' ? {color: 'red'} : {color: 'black'}}
     ]);
     const[open, setOpen] = React.useState(false);
+    
     const inputChanged = (event) => {
         setTodo({...todo, [event.target.name] : event.target.value});
     }
-    
+
+    function changeDate(date){
+        setTodo({...todo, [todo.date]: date.value} );
+    }
+
     const addTodo = (event) => {
         event.preventDefault();
         setTodoList([todo, ...todoList]);
@@ -72,13 +78,16 @@ function TodoList(){
                     value={todo.description}
                     onChange={inputChanged}
                 />
-                <TextField
+
+
+                <BasicDateTimePicker 
                     name="date"
                     label="Date"
                     variant="standard"
                     value={todo.date}
-                    onChange={inputChanged}
+                    onChange={(date) => changeDate(date)}
                 />
+
                 <TextField
                     name='priority'
                     label='Priority'
@@ -130,3 +139,7 @@ export default TodoList;
 // ikonit pitä asentaa npm kautta: npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
 //https://mui.com/material-ui/react-tabs/#main-content
 //https://mui.com/material-ui/react-select/
+
+//https://mui.com/x/react-date-pickers/getting-started/ //MUI date-pickers
+//npm install @mui/x-date-pickers // Install component (community version)
+//npm install dayjs // Install date library (if not already installed)
