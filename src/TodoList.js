@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 
 
-import { AgGridReact, ChangeDetectionStrategyType } from 'ag-grid-react';
+import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-material.css'; //löytyy bootstrap, material-design tai alpine teema
 import Button from '@mui/material/Button';
@@ -15,11 +15,12 @@ import dayjs from "dayjs";
 import BasicDateTimePicker from "./BasicDateTimePicker";
 
 
+
 function TodoList(){
     const [todo, setTodo] = React.useState({
         description: 'Get started',
         date: dayjs().toString(), 
-        priority: 'medium'
+        priority: 'Medium'
     });
     const [todoList, setTodoList] = React.useState([]);
     
@@ -29,7 +30,7 @@ function TodoList(){
         {field: 'description', sortable: true, filter: true, floatingFilter: true},
         {field: 'date', sortable: true, filter: true, floatingFilter: true},
         {field: 'priority', sortable: true, filter: true, floatingFilter: true,
-            cellStyle: params => params.value === 'high' ? {color: 'red'} : {color: 'black'}}
+            cellStyle: params => params.value === 'High' ? {color: 'red'} : {color: 'black'}}
     ]);
     const[open, setOpen] = React.useState(false);
     
@@ -37,9 +38,11 @@ function TodoList(){
         setTodo({...todo, [event.target.name] : event.target.value});
     }
 
-    function changeDate(date){
-        setTodo({...todo, [todo.date]: date.value} );
+    
+    function changeDate(newDate){
+        setTodo({...todo, [todo.date]: (newDate)} );
     }
+    
 
     const addTodo = (event) => {
         event.preventDefault();
@@ -79,12 +82,11 @@ function TodoList(){
                     onChange={inputChanged}
                 />
 
-
                 <BasicDateTimePicker 
                     name="date"
                     label="Date"
                     variant="standard"
-                    value={todo.date}
+                    value={BasicDateTimePicker.value}
                     onChange={(date) => changeDate(date)}
                 />
 
