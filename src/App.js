@@ -15,6 +15,8 @@ import{
 import About from "./About";
 import Contact from "./Contact";
 import NotFound from "./NotFound";
+import NavTabs from './NavTabs';
+//import LinkTab from './LinkTab';
 
 function App() {
 
@@ -27,6 +29,10 @@ function App() {
           </Toolbar>
         </AppBar>
 
+        <hr></hr>
+        
+        <NavTabs />
+
         <br></br>
         <Button variant="outlined" component={Link} to="/">Todo List</Button>
         <Button variant="outlined" component={Link} to="/about">About</Button>
@@ -38,6 +44,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+
 
       </div>
     </BrowserRouter>
